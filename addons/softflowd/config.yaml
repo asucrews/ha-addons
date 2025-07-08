@@ -1,5 +1,5 @@
 name: "Softflowd"
-version: "1.1.0"
+version: "1.1.1"
 slug: "softflowd"
 description: "NetFlow exporter using softflowd with configurable timeouts and version"
 arch:
