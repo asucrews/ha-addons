@@ -37,7 +37,7 @@ jobs:
       - name: Get version from config.yaml
         id: get-version
         run: |
-          VERSION=$(yq '.version' softflowd/config.yaml)
+          VERSION=$(yq '.version' addons/softflowd/config.yaml)
           echo "VERSION=$VERSION"
           echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
 
