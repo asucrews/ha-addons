@@ -25,18 +25,19 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Login to GitHub Container Registry
+      - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push image
+      - name: Build and push softflowd add-on
         uses: docker/build-push-action@v5
         with:
-          context: ./addons/${{ env.ADDON_SLUG }}
+          context: ./addons/softflowd
           push: true
           platforms: linux/${{ matrix.arch }}
-          tags: |
-            ${{ env.GHCR_NAMESPACE }}/${{ env.ADDON_SLUG }}-${{ matrix.arch }}:latest
+          tags: ${{ env.GHCR_NAMESPACE }}/${{ env.ADDON_SLUG }}-${{ matrix.arch }}:latest
+          build-args: |
+            BUILD_FROM=ghcr.io/home-assistant/${{ matrix.arch }}-base:latest
