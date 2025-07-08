@@ -1,4 +1,4 @@
-addonname: Build Softflowd Add-on (in series)
+name: Build Softflowd Add-on (in series)
 
 on:
   workflow_dispatch:
