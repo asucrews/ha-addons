@@ -1,11 +1,11 @@
-name: Build Softflowd Add-on (in series)
+addonsname: Build Softflowd Add-on (in series)
 
 on:
   workflow_dispatch:
   push:
     branches: [main]
     paths:
-      - 'softflowd/**'
+      - 'addons/softflowd/**'
 
 jobs:
   build:
@@ -33,5 +33,5 @@ jobs:
               --build-arg BUILD_FROM=ghcr.io/home-assistant/$ARCH-base:latest \
               --tag ghcr.io/${{ github.repository_owner }}/softflowd-$ARCH:latest \
               --push \
-              ./softflowd
+              ./addons/softflowd
           done
