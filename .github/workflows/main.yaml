@@ -7,6 +7,10 @@ on:
       - 'addons/softflowd/**'
   workflow_dispatch:
 
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: false
+
 env:
   ADDON_SLUG: softflowd
   GHCR_NAMESPACE: ghcr.io/${{ github.repository_owner }}
