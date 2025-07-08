@@ -47,6 +47,7 @@ jobs:
             docker buildx build \
               --platform linux/$ARCH \
               --build-arg BUILD_FROM=ghcr.io/home-assistant/$ARCH-base:latest \
+              --tag ghcr.io/${{ github.actor }}/softflowd-$ARCH:$VERSION \
               --tag ghcr.io/${{ github.actor }}/softflowd-$ARCH:latest \
               --push \
               ./addons/softflowd
