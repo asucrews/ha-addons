@@ -1,0 +1,4 @@
+name: ASUCrews HA Addons
+url: https://github.com/asucrews/ha-addons
+maintainer: Jeremy Crews
+homeassistant_version: "2024.7"   # optional min version
