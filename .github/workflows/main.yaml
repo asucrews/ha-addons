@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'addons/softflowd/**'
+      - 'ha-addons/softflowd/**'
   workflow_dispatch:
 
 env:
@@ -35,7 +35,7 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v5
         with:
-          context: ./addons/${{ env.ADDON_SLUG }}
+          context: ./ha-addons/${{ env.ADDON_SLUG }}
           push: true
           platforms: linux/${{ matrix.arch }}
           tags: |
