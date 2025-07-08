@@ -37,7 +37,7 @@ jobs:
       - name: Extract architectures from config.yaml
         id: extract-arches
         run: |
-          ARCHES=$(yq '.arch[]' softflowd/config.yaml | xargs)
+          ARCHES=$(yq '.arch[]' addons/softflowd/config.yaml | xargs)
           echo "ARCHES=$ARCHES" >> "$GITHUB_OUTPUT"
 
       - name: Build and push images (one at a time)
