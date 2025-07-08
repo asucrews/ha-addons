@@ -34,6 +34,13 @@ jobs:
           sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
           sudo chmod +x /usr/local/bin/yq
 
+      - name: Get version from config.yaml
+        id: get-version
+        run: |
+          VERSION=$(yq '.version' softflowd/config.yaml)
+          echo "VERSION=$VERSION"
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+
       - name: Extract architectures from config.yaml
         id: extract-arches
         run: |
@@ -43,11 +50,11 @@ jobs:
       - name: Build and push images (one at a time)
         run: |
           for ARCH in ${{ steps.extract-arches.outputs.ARCHES }}; do
-            echo "🔨 Building softflowd for $ARCH"
+            echo "🔨 Building softflowd for $ARCH with version ${{ steps.get-version.outputs.VERSION }}"
             docker buildx build \
               --platform linux/$ARCH \
               --build-arg BUILD_FROM=ghcr.io/home-assistant/$ARCH-base:latest \
-              --tag ghcr.io/${{ github.actor }}/softflowd-$ARCH:$VERSION \
+              --tag ghcr.io/${{ github.actor }}/softflowd-$ARCH:${{ steps.get-version.outputs.VERSION }} \
               --tag ghcr.io/${{ github.actor }}/softflowd-$ARCH:latest \
               --push \
               ./addons/softflowd
