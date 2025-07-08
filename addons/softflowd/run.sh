@@ -19,4 +19,4 @@ bashio::log.info "Starting softflowd on ${IFACE}, sending to ${COLLECTOR}, versi
 exec softflowd -i "${IFACE}" -n "${COLLECTOR}" -v "${VERSION}" \
     -t maxlife="${MAXLIFE}" -t tcp="${TCP}" -t udp="${UDP}" \
     -t icmp="${ICMP}" -t general="${GENERAL}" -t tcp.rst="${TCP_RST}" \
-    -t tcp.fin="${TCP_FIN}" -t expint="${EXPINT}"
+    -t tcp.fin="${TCP_FIN}" -t expint="${EXPINT} -N"
