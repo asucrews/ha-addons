@@ -29,9 +29,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Extract architectures from config.yaml
+        id: extract-arches
+        run: |
+          ARCHES=$(yq '.arch[]' softflowd/config.yaml | xargs)
+          echo "ARCHES=$ARCHES" >> "$GITHUB_OUTPUT"
+
       - name: Build and push images (one at a time)
         run: |
-          for ARCH in amd64 aarch64 armv7; do
+          for ARCH in ${{ steps.extract-arches.outputs.ARCHES }}; do
             echo "🔨 Building softflowd for $ARCH"
             docker buildx build \
               --platform linux/$ARCH \
